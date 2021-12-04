@@ -1,0 +1,172 @@
+---
+title: "OKC Assessment Work"
+author: "Jonathan Simon"
+date: "11/30/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+library(dplyr)
+library(plyr)
+shots <- read.csv("shots_data.csv")
+```
+
+```{r}
+# Problem 5
+shotsA<- subset(shots, team == "Team A")
+shots_in_2PtA <- shotsA %>%
+  filter(((y>7.8) & (x<23.75)) | ((y<=7.8) & (x<22)))
+
+total_shotsA <- count(shotsA, "team")
+print(total_shotsA)
+total_shotsA_in_2PT <- count(shots_in_2PtA, "team")
+print(total_shotsA_in_2PT)
+TeamA_percentage_shots_in_2PT <- (269/280)*100
+print(TeamA_percentage_shots_in_2PT)
+```
+
+```{r}
+# Problem 6
+shots_in_NC3A <- shotsA %>%
+  filter((y>7.8) & (x>23.5))
+
+total_shotsA_in_NC3 <- count(shots_in_NC3A, "team")
+print(total_shotsA_in_NC3)
+print(total_shotsA)
+TeamA_percentage_shots_in_NC3 <- (0/280)*100
+print(TeamA_percentage_shots_in_NC3)
+```
+
+```{r}
+# Problem 7
+shots_in_C3A <- shotsA %>%
+  filter((y<=7.8) & (x>22))
+
+total_shotsA_in_C3 <- count(shots_in_C3A, "team")
+print(total_shotsA_in_C3)
+print(total_shotsA)
+TeamA_percentage_shots_in_C3 <- (11/280)*100
+print(TeamA_percentage_shots_in_C3)
+```
+
+```{r}
+# Problem 8
+ThreePM_A_2PT <- 0 #cannot have a three-pointer in a 2PT zone
+print(ThreePM_A_2PT)
+Total_FGM_A_2PT <- sum(shots_in_2PtA$fgmade==1)
+print(Total_FGM_A_2PT)
+Total_FGA_A_2PT <- total_shotsA_in_2PT
+print(Total_FGA_A_2PT)
+
+eFG_A_2PT <- ((99 + (0.5*0))/269)*100
+eFG_A_2PT
+```
+
+```{r}
+# Problem 9
+Total_FGM_A_NC3 <- sum(shots_in_NC3A$fgmade==1)
+print(Total_FGM_A_NC3)
+ThreePM_A_NC3 <- Total_FGM_A_NC3
+print(ThreePM_A_NC3)
+Total_FGA_A_NC3 <- total_shotsA_in_NC3
+print(Total_FGA_A_NC3)
+
+eFG_A_NC3 <- ((0 + (0.5*0))/0)*100
+eFG_A_NC3
+```
+
+```{r}
+# Problem 10
+ThreePM_A_C3 <- sum(shots_in_C3A$fgmade==1)
+print(ThreePM_A_C3)
+Total_FGM_A_C3 <- ThreePM_A_C3
+print(Total_FGM_A_C3)
+Total_FGA_A_C3 <- total_shotsA_in_C3
+print(Total_FGA_A_C3)
+
+eFG_A_C3 <- ((6 + (0.5*6))/11)*100
+eFG_A_C3
+```
+
+```{r}
+# Problem 11
+shotsB<- subset(shots, team == "Team B")
+shots_in_2PtB <- shotsB %>%
+  filter(((y>7.8) & (x<23.75)) | ((y<=7.8) & (x<22)))
+
+total_shotsB <- count(shotsB, "team")
+print(total_shotsB)
+total_shotsB_in_2PT <- count(shots_in_2PtB, "team")
+print(total_shotsB_in_2PT)
+
+TeamB_percentage_shots_in_2PT <- (268/280)*100
+print(TeamB_percentage_shots_in_2PT)
+```
+
+```{r}
+# Problem 12
+shots_in_NC3B <- shotsB %>%
+  filter((y>7.8) & (x>23.5))
+
+total_shotsB_in_NC3 <- count(shots_in_NC3B, "team")
+print(total_shotsA_in_NC3)
+print(total_shotsB)
+TeamB_percentage_shots_in_NC3 <- (0/280)*100
+print(TeamB_percentage_shots_in_NC3)
+```
+
+```{r}
+# Problem 13
+shots_in_C3B <- shotsB %>%
+  filter((y<=7.8) & (x>22))
+
+total_shotsB_in_C3 <- count(shots_in_C3B, "team")
+print(total_shotsB_in_C3)
+print(total_shotsB)
+TeamB_percentage_shots_in_C3 <- (12/280)*100
+print(TeamB_percentage_shots_in_C3)
+```
+
+```{r}
+# Problem 14
+ThreePM_B_2PT <- 0 #cannot have a three-pointer in a 2PT zone
+print(ThreePM_B_2PT)
+Total_FGM_B_2PT <- sum(shots_in_2PtB$fgmade==1)
+print(Total_FGM_B_2PT)
+Total_FGA_B_2PT <- total_shotsB_in_2PT
+print(Total_FGA_B_2PT)
+
+eFG_B_2PT <- ((112 + (0.5*0))/268)*100
+eFG_B_2PT
+```
+
+```{r}
+# Problem 15
+Total_FGM_B_NC3 <- sum(shots_in_NC3B$fgmade==1)
+print(Total_FGM_B_NC3)
+ThreePM_B_NC3 <- Total_FGM_B_NC3
+print(ThreePM_B_NC3)
+Total_FGA_B_NC3 <- total_shotsB_in_NC3
+print(Total_FGA_B_NC3)
+
+eFG_B_NC3 <- ((0 + (0.5*0))/0)*100
+eFG_B_NC3
+```
+
+```{r}
+# Problem 16
+ThreePM_B_C3 <- sum(shots_in_C3B$fgmade==1)
+print(ThreePM_B_C3)
+Total_FGM_B_C3 <- ThreePM_B_C3
+print(Total_FGM_B_C3)
+Total_FGA_B_C3 <- total_shotsB_in_C3
+print(Total_FGA_B_C3)
+
+eFG_B_C3 <- ((3 + (0.5*3))/12)*100
+eFG_B_C3
+```
